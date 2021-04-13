@@ -2,29 +2,54 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" /b >
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Primeira página HTML</title>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <link rel="stylesheet" type="text/css" href="style/style.css"/>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     </head>
-    <body>
+    <body onscroll="scrollFunction()">
         <header class="header">
             <div class="container">
                 <div class="row">
                     <div class="posi-5 posi-4 logo-header">
                         <img class="image-fluid" src="images/logo-digio.png" alt="Logo Digio">                 
-                    </div>                
+                    </div>  
+                    <div id="nav2"class="novo-pos1 novo-pos2" style="display: none;">
+                        <a id="pedir" class="btn btn-pink2 peca-cartao">Peça seu cartão</a>
+                    </div>
                 </div>
             </div>
             <div class="scroll-back">
-                <div class="scroll-line"></div>
+                <div class="scroll-line" style="width: 0%;"></div>
             </div>  
         </header>
         <main class="home">
             <section class="home-screen">
+                <div class="container">
+                    <div class="row column-reverse">
+                        <div class="form-log">
+                            <input id="name-person" class="input-container" type="text" placeholder="Primeiro nome"/>	
+                        </div>
+                        <div class="form-log">		
+                            <input id="email-person" type="mail" class="input-container" type="email" placeholder="Email"/>
+                        </div>
+                        <div class="form-log">
+                            <button onclick="changeClick()" class="button-logar">Logar</button>
+                        </div>
+                        <div style="padding: 10px; padding-top: 15px;">
+                            <strong class="welcome" id="show-name-screen"></strong>
+                        </div>
+                        <div>
+                            <img class="welcome-pic"id="show-pic-screen" src="">
+                        </div>
+                    </div>    
+                </div>
+            </section>
+            <section class="digioCartao">
                 <div class="container">
                     <div class="row column-reverse">
                         <div class="posi-1 posi-2 posi-6">
@@ -34,7 +59,7 @@
                         <div class="posil-1 posil-2 posi-3">
                             <h1 class="title-digio">Digio, seu banco digital</h1>
                             <p class="text-digo">Mais de 1.6 milhçoes de pessoas livres de anuidade e juros rotativos com o DigioCartão</p>
-                            <a href="" class="btn btn-pink" >Peça seu cartão</a>
+                            <a id="nav"class="btn btn-pink" style>Peça seu cartão</a>
                         </div>
                     </div>
                 </div>
@@ -44,7 +69,7 @@
                     <div class="row">
                         <div class="newpos-1 newpos-12 posi-3">
                             <h2 class="title-digioCartao">DigioCartão</h2>
-                            <p class="text-digioCartao">Cartão de crétido VISA Internacional<br> sem anuidade para você usar no mundo inteiro. Gerencie seus gastos<br> direto do seu celular DigioApp.
+                            <p class="text-digioCartao">Cartão de crétido VISA Internacional<br> sem anuidade para você usar no mundo inteiro. Gerencie seus gastos<br> direto do seu celular no DigioApp.
                             </p>
                             <div class="row pad-1">
                                 <div class="pad-2 posi-7">
@@ -78,6 +103,55 @@
                     </div>
                 </div>
             </section>
+            <section>
+                <ul id="aquiviu"></ul>
+            </section>
         </main>
+        <script type="text/javascript" charset="utf-8">
+            var nav = document.getElementById("nav");
+            var nav2 = document.getElementById("nav2");
+            var y = nav.offsetTop;
+            var container = document.getElementById("aquiviu");
+            var url = '';
+            var firstName = document.getElementById("name-person");
+            var emailName = document.getElementById("email-person");
+            function scrollFunction(){
+                if(window.pageYOffset <= y + 150){
+                    nav.classList.add("btn","btn-pink")
+                    nav.style.display = "flex"
+                    nav2.style.display = "none"
+                } else {
+                      nav.style.display = "none"
+                      nav2.style.display = "block";
+                }        
+            }   
+            function changeClick(){
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "https://reqres.in/api/users", true);
+                xhr.responseType = "json";
+                xhr.onload = function(){
+                    if(this.readyState == 4 && this.status == 200){
+                        var profile = this.response.data;
+                        for(var i = 0; i <= profile.length; i++){
+                            if(profile[i].email == emailName.value && profile[i].first_name == firstName.value ){
+                                document.getElementById("name-person").value = "";
+                                document.getElementById("email-person").value = "";
+                                document.getElementById("show-name-screen").innerHTML = "Seja bem vindo(a) " + profile[i].first_name;
+                                document.getElementById("show-pic-screen").src = profile[i].avatar;
+                                break;
+                            } else if(profile[i].email == emailName.value || profile[i].first_name == firstName.value) {
+                                document.getElementById("show-pic-screen").src = ""
+                                document.getElementById("show-name-screen").innerHTML = "Nome ou e-mail incorreto!"
+                                break;
+                            } else {
+                                document.getElementById("show-pic-screen").src = ""
+                                document.getElementById("show-name-screen").innerHTML = "Usuário não existe!"
+                            }
+                        }
+                    }
+                };
+                xhr.send();
+            }     
+        </script>
     </body>
 </html>

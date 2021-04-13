@@ -52,6 +52,58 @@ a {
     text-decoration: none;
 }
 
+#pedir{
+    float: right
+}
+
+.input-container{
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.button-logar{
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #ff6776;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.form-log{
+    position: relative;
+    margin:10px;
+    text-align: center;
+}
+
+.welcome{
+    font-size: 20px;
+    color:#fff;
+    font-weight: 400;
+    font-family: "Montserrat", sans-serif;
+    margin-left: 50px;
+}
+
+.welcome-pic{
+    width: 80px;
+    height: auto;
+    margin-left: 10px;
+    border-radius: 40px;
+}
+
 .scroll-back{
     width: 100%;
     height: 5px;
@@ -70,6 +122,10 @@ a {
     left: 0;
     top: 74px;
     z-index: 2;
+}
+
+.scroll-change{
+    display: none;
 }
 
 .container{
@@ -96,10 +152,15 @@ a {
     padding: 100px 0 50px;
 }
 
-.posi-1, .posi-2, .posi-3, .posil-1, .posil-2, .posi-4, .newpos-1, .newpos-12 .newpos-2, .newpos-3, .posi-6, .posi-7{
+.posi-1, .posi-2, .posi-3, .posil-1, .posil-2, .posi-4, .newpos-1, .newpos-12 .newpos-2, .newpos-3, .posi-6, .posi-7, .novo-pos1, .novo-pos2{
     position: relative;
     padding-right: 15px;
     padding-left: 15px;
+}
+
+.novo-pos2{
+    flex: 0 0 55%;
+    max-width: 55%;
 }
 
 .posi-3{
@@ -142,7 +203,21 @@ a {
 }
 
 .btn-pink{
-    margin: 80px 0;
+    margin: 0 10px;
+    justify-content: center;
+    padding: 10px 0;
+    width: 258px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    background: #ff6776;
+    display: flex;
+    align-items: center;
+}
+
+.btn-pink2{
+    margin: 0 10px;
     justify-content: center;
     padding: 10px 0;
     width: 258px;
@@ -176,6 +251,12 @@ a {
     border: 1px solid transparent;
     line-height: 1.5;
     border-radius: .25rem;
+}
+
+.peca-cartao{
+    padding: 15px 3px;
+    font-size: 16px;
+    margin-top: 9px;
 }
 
 .digioCartao{
@@ -274,6 +355,11 @@ a {
     .btn-white{
         padding: 5px 10px;
     }
+    .peca-cartao{
+        width: 95%;
+        font-size: 13px;  
+    }
+    
 }
 
 @media (min-width: 768px){
@@ -293,8 +379,8 @@ a {
         max-width: 41%;
     }   
     .newpos-1{
-        flex: 0 0 30%;
-        max-width: 30%;
+        flex: 0 0 33%;
+        max-width: 33%;
     }
     .newpos-3{
         flex: 0 0 53%;
@@ -302,6 +388,10 @@ a {
     } 
     .appearMobile{
         display: none;
+    }
+    .novo-pos1{
+        flex: 0 0 50%;
+        max-width: 50%;
     }
 } 
 
