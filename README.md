@@ -1,3 +1,2 @@
 # ec38b
-Web
-Feito apenas pelo Aluno: Leonardo Batista
+Diciplina de Web, feito apenas pelo Aluno: Leonardo Batista
