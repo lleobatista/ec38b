@@ -1,2 +1,3 @@
-# ec38b
-Diciplina de Web, feito apenas pelo Aluno: Leonardo Batista
+# EC38B - Web Project
+
+Made by Leonardo Batista
