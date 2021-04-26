@@ -32,19 +32,19 @@
                 <div class="container">
                     <div class="row column-reverse">
                         <div class="form-log">
-                            <input id="name-person" class="input-container" type="text" placeholder="Primeiro nome"/>	
+                            <input id="email-person" type="mail" class="input-container" type="email" placeholder="Email"/>	
                         </div>
                         <div class="form-log">		
-                            <input id="email-person" type="mail" class="input-container" type="email" placeholder="Email"/>
+                            <input id="name-person" class="input-container" type="password" placeholder="Password"/>
                         </div>
                         <div class="form-log">
-                            <button onclick="changeClick()" class="button-logar">Logar</button>
+                            <button id="logar-bottom" onclick="changeClick()" class="button-logar">Logar</button>
                         </div>
                         <div style="padding: 10px; padding-top: 15px;">
                             <strong class="welcome" id="show-name-screen"></strong>
                         </div>
-                        <div>
-                            <img class="welcome-pic"id="show-pic-screen" src="">
+                        <div class="form-log">
+                            <button id="exit-bottom" style="display: none;" onclick="backClick()" class="button-logar">SAIR</button>
                         </div>
                     </div>    
                 </div>
@@ -137,32 +137,67 @@
                 }        
             }   
 
+            const sendHttpRequest = (method, url, data) => {
+                const promise = new Promise((resolve, reject) => {
+                    const xhr = new XMLHttpRequest();
+                        xhr.open(method, url);
+
+                        xhr.responseType = 'json';
+
+                        if (data) {
+                         xhr.setRequestHeader('Content-Type', 'application/json');
+                        }
+
+                        xhr.onload = () => {
+                            if (xhr.status >= 400) {
+                                reject(xhr.response);
+                            } else {
+                                resolve(xhr.response);
+                            }
+                        };
+
+                        xhr.onerror = () => {
+                            reject('Something went wrong!');
+                        };
+
+                        xhr.send(JSON.stringify(data));
+                    });
+                    return promise;
+                };
+
+            function backClick(){
+                document.getElementById("name-person").style.display = "flex";
+                document.getElementById("email-person").style.display = "flex";
+                document.getElementById("logar-bottom").style.display = "flex";
+                document.getElementById("show-name-screen").innerHTML = "";
+                document.getElementById("exit-bottom").style.display = "none";
+            }
+
             function changeClick(){                                         //Para logar no perfil.
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", "https://reqres.in/api/users", true);
+                data = {                                                    //Fazer o teste com e-mail: eve.holt@reqres.in e senha: cityslicka
+                    email: emailName.value,
+                    password: firstName.value
+                }
+                xhr = new XMLHttpRequest();
                 xhr.responseType = "json";
+                xhr.open("POST", "https://reqres.in/api/login", true);
                 xhr.onload = function(){
                     if(this.readyState == 4 && this.status == 200){
-                        var profile = this.response.data;
-                        for(var i = 0; i <= profile.length; i++){
-                            if(profile[i].email == emailName.value && profile[i].first_name == firstName.value ){
-                                document.getElementById("name-person").value = "";
-                                document.getElementById("email-person").value = "";
-                                document.getElementById("show-name-screen").innerHTML = "Seja bem vindo(a) " + profile[i].first_name;
-                                document.getElementById("show-pic-screen").src = profile[i].avatar;
-                                break;
-                            } else if(profile[i].email == emailName.value || profile[i].first_name == firstName.value) {
-                                document.getElementById("show-pic-screen").src = ""
-                                document.getElementById("show-name-screen").innerHTML = "Nome ou e-mail incorreto!"
-                                break;
-                            } else {
-                                document.getElementById("show-pic-screen").src = ""
-                                document.getElementById("show-name-screen").innerHTML = "Usuário não existe!"
-                            }
-                        }
+                        document.getElementById("name-person").style.display = "none";
+                        document.getElementById("email-person").style.display = "none";
+                        document.getElementById("logar-bottom").style.display = "none";
+                        document.getElementById("show-name-screen").innerHTML = "Seja bem vindo(a) Eve";
+                        document.getElementById("exit-bottom").style.display = "flex";
+                    }
+                    else if(emailName.value == "" && firstName.value == ""){
+                        document.getElementById("show-name-screen").innerHTML = "Espaços em branco! Por favor digitar um e-mail e senha";
+                    }
+                    else{
+                        document.getElementById("show-name-screen").innerHTML = "E-mail ou senha inválido";
                     }
                 };
-                xhr.send();
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify(data));
             }  
 
             async function findStock(){                                       //Para encontrar uma ação, nesse caso estou utilizando axious.
