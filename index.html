@@ -187,7 +187,7 @@
                         document.getElementById("email-person").style.display = "none";
                         document.getElementById("logar-bottom").style.display = "none";
                         document.getElementById("show-name-screen").innerHTML = "Seja bem vindo(a) Eve";
-                        document.getElementById("exit-bottom").style.display = "flex";
+                        document.getElementById("exit-bottom").style.display = "flex";                     
                     }
                     else if(emailName.value == "" && firstName.value == ""){
                         document.getElementById("show-name-screen").innerHTML = "Espaços em branco! Por favor digitar um e-mail e senha";
@@ -198,7 +198,8 @@
                 };
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.send(JSON.stringify(data));
-            }  
+            }
+            
 
             async function findStock(){                                       //Para encontrar uma ação, nesse caso estou utilizando axious.
                 var equity = document.getElementById("stock-symbol");   //Para teste pode digitar os simbolos: IBM, gold, FB e entre outros.                                
