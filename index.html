@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -16,8 +16,8 @@
             <div class="container">
                 <div class="row">
                     <div class="posi-5 posi-4 logo-header">
-                        <img class="image-fluid" src="images/logo-digio.png" alt="Logo Digio">                 
-                    </div>  
+                        <img class="image-fluid" src="images/logo-digio.png" alt="Logo Digio">
+                    </div>
                     <div id="nav2"class="novo-pos1 novo-pos2" style="display: none;">
                         <a id="pedir" class="btn btn-pink2 peca-cartao">Peça seu cartão aqui</a>
                     </div>
@@ -25,16 +25,16 @@
             </div>
             <div class="scroll-back">
                 <div class="scroll-line" style="width: 0%;"></div>
-            </div>  
+            </div>
         </header>
         <main class="home">
             <section class="home-screen">
                 <div class="container">
                     <div class="row column-reverse">
                         <div class="form-log">
-                            <input id="email-person" type="mail" class="input-container" type="email" placeholder="Email"/>	
+                            <input id="email-person" type="mail" class="input-container" type="email" placeholder="Email"/>
                         </div>
-                        <div class="form-log">		
+                        <div class="form-log">
                             <input id="name-person" class="input-container" type="password" placeholder="Password"/>
                         </div>
                         <div class="form-log">
@@ -44,16 +44,16 @@
                             <strong class="welcome" id="show-name-screen"></strong>
                         </div>
                         <div class="form-log">
-                            <button id="exit-bottom" style="display: none;" onclick="backClick()" class="button-logar">SAIR</button>
+                            <button id="exit-bottom" onclick="backClick()" class="button-logar desapar">SAIR</button>
                         </div>
-                    </div>    
+                    </div>
                 </div>
             </section>
             <section class="digioCartao">
                 <div class="container">
                     <div class="row column-reverse">
                         <div class="posi-1 posi-2 posi-6">
-                            <img class="image-fluid hideMobile" src="images/digio-cartao.png">  
+                            <img class="image-fluid hideMobile" src="images/digio-cartao.png">
                             <img class="image-fluid appearMobile blockMobile" src="images/digio-cartao-celular.png">
                         </div>
                         <div class="posil-1 posil-2 posi-3">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </section>
-            <section class="digioCartao"> 
+            <section class="digioCartao">
                 <div class="container">
                     <div class="row">
                         <div class="newpos-1 newpos-12 posi-3">
@@ -117,122 +117,6 @@
                 </div>
             </section>
         </main>
-        <script type="text/javascript" charset="utf-8">
-            var nav = document.getElementById("nav");
-            var nav2 = document.getElementById("nav2");
-            var y = nav.offsetTop;
-            var container = document.getElementById("aquiviu");
-            var url = '';
-            var firstName = document.getElementById("name-person");
-            var emailName = document.getElementById("email-person");
-
-            function scrollFunction(){                                      //Para aparecer e desaparecer o botão quando o usuário descer a página. 
-                if(window.pageYOffset <= y + 150){                          //O botão referido é o PEÇA SEU CARTÃO.
-                    nav.classList.add("btn","btn-pink")
-                    nav.style.display = "flex"
-                    nav2.style.display = "none"
-                } else {
-                      nav.style.display = "none"
-                      nav2.style.display = "block";
-                }        
-            }   
-
-            const sendHttpRequest = (method, url, data) => {
-                const promise = new Promise((resolve, reject) => {
-                    const xhr = new XMLHttpRequest();
-                        xhr.open(method, url);
-
-                        xhr.responseType = 'json';
-
-                        if (data) {
-                         xhr.setRequestHeader('Content-Type', 'application/json');
-                        }
-
-                        xhr.onload = () => {
-                            if (xhr.status >= 400) {
-                                reject(xhr.response);
-                            } else {
-                                resolve(xhr.response);
-                            }
-                        };
-
-                        xhr.onerror = () => {
-                            reject('Something went wrong!');
-                        };
-
-                        xhr.send(JSON.stringify(data));
-                    });
-                    return promise;
-                };
-
-            function backClick(){
-                document.getElementById("name-person").style.display = "flex";
-                document.getElementById("email-person").style.display = "flex";
-                document.getElementById("logar-bottom").style.display = "flex";
-                document.getElementById("show-name-screen").innerHTML = "";
-                document.getElementById("exit-bottom").style.display = "none";
-            }
-
-            function changeClick(){                                         //Para logar no perfil.
-                data = {                                                    //Fazer o teste com e-mail: eve.holt@reqres.in e senha: cityslicka
-                    email: emailName.value,
-                    password: firstName.value
-                }
-                xhr = new XMLHttpRequest();
-                xhr.responseType = "json";
-                xhr.open("POST", "https://reqres.in/api/login", true);
-                xhr.onload = function(){
-                    if(this.readyState == 4 && this.status == 200){
-                        document.getElementById("name-person").style.display = "none";
-                        document.getElementById("email-person").style.display = "none";
-                        document.getElementById("logar-bottom").style.display = "none";
-                        document.getElementById("show-name-screen").innerHTML = "Seja bem vindo(a) Eve";
-                        document.getElementById("exit-bottom").style.display = "flex";                     
-                    }
-                    else if(emailName.value == "" && firstName.value == ""){
-                        document.getElementById("show-name-screen").innerHTML = "Espaços em branco! Por favor digitar um e-mail e senha";
-                    }
-                    else{
-                        document.getElementById("show-name-screen").innerHTML = "E-mail ou senha inválido";
-                    }
-                };
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.send(JSON.stringify(data));
-            }
-            
-
-            async function findStock(){                                       //Para encontrar uma ação, nesse caso estou utilizando axious.
-                var equity = document.getElementById("stock-symbol");   //Para teste pode digitar os simbolos: IBM, gold, FB e entre outros.                                
-                let res = await axios.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol='+ equity.value + '&apikey=XJIGDK89Z0MYT77D')
-                var now = new Date();
-                var monthToday = now.getMonth() + 1;
-                    if(monthToday < 10){
-                        monthToday = "0" + monthToday;
-                    }
-                    var today = now.getFullYear() + "-" + monthToday + "-" + now.getDate() ; //Pega o dia da consulta, as vezes pode não ter sido atualido.
-                    console.log(res.data);                                                   //Caso não estar atualizado, pegar uma data anterior.
-                    if(!res.data["Time Series (Daily)"]){                                    //A data precisa ser ANO-MÊS-DIA.
-                        document.getElementById("open-stock").innerHTML = "Ação não registrada."
-                        document.getElementById("high-stock").innerHTML = "";
-                        document.getElementById("low-stock").innerHTML = "";
-                        document.getElementById("close-stock").innerHTML = ""; 
-                        document.getElementById("symbol-stock").innerHTML = "";                      
-                    }else if (!res.data["Time Series (Daily)"][today]){
-                        document.getElementById("open-stock").innerHTML = "Dados não atualizados para a data de hoje."
-                        document.getElementById("high-stock").innerHTML = "";
-                        document.getElementById("low-stock").innerHTML = "";
-                        document.getElementById("close-stock").innerHTML = "";
-                        document.getElementById("symbol-stock").innerHTML = "";
-                    }else{
-                        var dataStock = res.data["Time Series (Daily)"][today];
-                        document.getElementById("stock-symbol").value = "";                        
-                        document.getElementById("symbol-stock").innerHTML = res.data["Meta Data"]["2. Symbol"];
-                        document.getElementById("open-stock").innerHTML = "Open: " + dataStock["1. open"];
-                        document.getElementById("high-stock").innerHTML = "High: " + dataStock["2. high"];
-                        document.getElementById("low-stock").innerHTML = "Low: " + dataStock["3. low"];
-                        document.getElementById("close-stock").innerHTML = "Close: " + dataStock["4. close"];
-                    }
-            }
-        </script>
+        <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>

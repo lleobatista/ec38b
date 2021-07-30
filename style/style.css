@@ -57,6 +57,10 @@ a {
     float: right
 }
 
+.desapar{
+  display: none;
+}
+
 .input-container{
   font-family: "Roboto", sans-serif;
   outline: 0;
@@ -190,7 +194,7 @@ a {
     font-family: "Montserrat", sans-serif;
 }
 
-.text-digo{ 
+.text-digo{
     font-size: 20px;
     color: #fff;
     font-weight: 400;
@@ -358,9 +362,9 @@ a {
     }
     .peca-cartao{
         width: 95%;
-        font-size: 13px;  
+        font-size: 13px;
     }
-    
+
 }
 
 @media (min-width: 768px){
@@ -370,7 +374,7 @@ a {
     .posi-1{
         flex: 0 0 60%;
         max-width: 60%;
-    } 
+    }
     .posil-1{
         flex: 0 0 30%;
         max-width: 30%;
@@ -378,7 +382,7 @@ a {
     .posi-4{
         flex: 0 0 41%;
         max-width: 41%;
-    }   
+    }
     .newpos-1{
         flex: 0 0 33%;
         max-width: 33%;
@@ -386,7 +390,7 @@ a {
     .newpos-3{
         flex: 0 0 53%;
         max-width: 53%;
-    } 
+    }
     .appearMobile{
         display: none;
     }
@@ -394,7 +398,7 @@ a {
         flex: 0 0 50%;
         max-width: 50%;
     }
-} 
+}
 
 @media (min-width: 992px){
     .container {
@@ -403,7 +407,7 @@ a {
     .posi-2{
         flex: 0 0 60.5%;
         max-width: 60.5%;
-    } 
+    }
     .posil-2{
         flex: 0 0 30%;
         max-width: 30%;
@@ -411,12 +415,12 @@ a {
     .newpos-2{
         flex: 0 0 53%;
         max-width: 53%;
-    } 
+    }
     .newpos-12{
         flex: 0 0 40%;
         max-width: 40%;
     }
-    
+
 }
 
 @media (min-width: 1200px){
